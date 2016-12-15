@@ -4,15 +4,15 @@
 
 <link rel="import" href="my-mixin-1.html">
 <link rel="import" href="my-mixin-2.html">
-<dom-module id="my-element-new">
+<dom-module id="my-element-new-syntax">
   <template>
     <style is="custom-style" include="shared-styles"></style>
 
-    <div><code>my-element-new</code> has mixins <code>my-mixin-2</code> which is the root mixin
+    <div><code>my-element-new-syntax</code> has mixins <code>my-mixin-2</code> which is the root mixin
     and <code>my-mixin-1</code> which is mixed into <code>my-mixin-2</code>. i.e.</div>
     <div>
       <pre>
-<code>class MyElementNew extends MyMixin1(MyMixin2(Polymer.Element))</code>
+<code>class MyElementNewSyntax extends MyMixin1(MyMixin2(Polymer.Element))</code>
       </pre>
     </div>
 
@@ -72,26 +72,26 @@
   </template>
   <script>
 
-    MyElementNewInjector = (...injectedMixins) => {
+    MyElementNewInjector = (...injectedClasses) => {
       let Empty = superClass => {
         return class extends superClass {};
       }
 
-      injectedMixins[0] = injectedMixins[0] ? injectedMixins[0] : Empty;
-      injectedMixins[1] = injectedMixins[1] ? injectedMixins[1] : Empty;
-      injectedMixins[2] = injectedMixins[2] ? injectedMixins[2] : Empty;
+      injectedClasses[0] = injectedClasses[0] ? injectedClasses[0] : Empty;
+      injectedClasses[1] = injectedClasses[1] ? injectedClasses[1] : Empty;
+      injectedClasses[2] = injectedClasses[2] ? injectedClasses[2] : Empty;
 
-      let newSuperClass = injectedMixins[2](MyMixins.MyMixin1(injectedMixins[1](MyMixins.MyMixin2(injectedMixins[0]))));
+      let newSuperClass = injectedClasses[2](MyMixins.MyMixin1(injectedClasses[1](MyMixins.MyMixin2(injectedClasses[0]))));
 
-      return class MyElementNew extends newSuperClass {
-        static get is() { return 'my-element-new' }
+      return class MyElementNewSyntax extends newSuperClass {
+        static get is() { return 'my-element-new-syntax' }
 
         static get config() {
           let configuration = {
             properties: {
               myElementNewDefault: {
                 type: String,
-                value: 'defined by my-element-new'
+                value: 'defined by my-element-new-syntax'
               },
               
               myElementNewObserved: {
@@ -139,39 +139,39 @@
         constructor() {
           super();
 
-          this.myElementNewCreated = 'defined by my-element-new';
+          this.myElementNewCreated = 'defined by my-element-new-syntax';
         }
 
         connectedCallback() {
           super.connectedCallback();
 
           this.myElementNewAttribute = this.getAttribute('myElementNewAttribute');
-          this.myElementNewAttached = 'defined by my-element-new';
+          this.myElementNewAttached = 'defined by my-element-new-syntax';
         }
 
         ready() {
           this.addEventListener('click', (e) => this.handleClick(e));
-          this._ensureAttribute('myElementNewAttribute', 'defined by my-element-new');
+          this._ensureAttribute('myElementNewAttribute', 'defined by my-element-new-syntax');
           this.myElementAttribute = this.getAttribute('myElementAttribute');
-          this.myElementNewReady = 'defined by my-element-new';
+          this.myElementNewReady = 'defined by my-element-new-syntax';
 
           super.ready();
         }
 
         myElementNewObservedChanged() {
-          this.myElementNewObserved = 'changed by my-element-new';
+          this.myElementNewObserved = 'changed by my-element-new-syntax';
         }
 
         handleClick(e) {
           e.stopPropagation();
-          this.myElementNewClick = 'click captured by my-element-new';
+          this.myElementNewClick = 'click captured by my-element-new-syntax';
           this.myElementNewClickCount += 1;
         }
       }
     }
 
-    let MyElementNew = MyElementNewInjector(Polymer.Element);
+    let MyElementNewSyntax = MyElementNewInjector(Polymer.Element);
 
-    customElements.define(MyElementNew.is, MyElementNew);
+    customElements.define(MyElementNewSyntax.is, MyElementNewSyntax);
   </script>
 </dom-module>
