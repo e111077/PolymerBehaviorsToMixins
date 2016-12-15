@@ -71,93 +71,106 @@
     </div>
   </template>
   <script>
-    let SuperClass = MyMixins.MyMixin1(MyMixins.MyMixin2(Polymer.Element));
 
-    class MyElementNew extends SuperClass {
-      static get is() { return 'my-element-new' }
+    MyElementNewInjector = (...injectedMixins) => {
+      let Empty = superClass => {
+        return class extends superClass {};
+      }
 
-      static get config() {
-        let configuration = {
-          properties: {
-            myElementNewDefault: {
-              type: String,
-              value: 'defined by my-element-new'
+      injectedMixins[0] = injectedMixins[0] ? injectedMixins[0] : Empty;
+      injectedMixins[1] = injectedMixins[1] ? injectedMixins[1] : Empty;
+      injectedMixins[2] = injectedMixins[2] ? injectedMixins[2] : Empty;
+
+      let newSuperClass = injectedMixins[2](MyMixins.MyMixin1(injectedMixins[1](MyMixins.MyMixin2(injectedMixins[0]))));
+
+      return class MyElementNew extends newSuperClass {
+        static get is() { return 'my-element-new' }
+
+        static get config() {
+          let configuration = {
+            properties: {
+              myElementNewDefault: {
+                type: String,
+                value: 'defined by my-element-new'
+              },
+              
+              myElementNewObserved: {
+                type: String,
+                value: 'default value'
+              },
+
+              myElementNewClick: {
+                type: String,
+                value: 'no clicks captured yet'
+              },
+
+              myElementNewClickCount: {
+                type: Number,
+                value: 0
+              },
+
+              myElementNewAttribute: {
+                type: String,
+                value: 'default value'
+              },
+
+              myElementNewCreated: {
+                type: String,
+                value: 'default value'
+              },
+
+              myElementNewAttached: {
+                type: String,
+                value: 'default value'
+              },
+
+              myElementNewReady: {
+                type: String,
+                value: 'default value'
+              }
             },
-            
-            myElementNewObserved: {
-              type: String,
-              value: 'default value'
-            },
 
-            myElementNewClick: {
-              type: String,
-              value: 'no clicks captured yet'
-            },
+            observers: ['myElementNewObservedChanged(myElementNewObserved)']
+          }
 
-            myElementNewClickCount: {
-              type: Number,
-              value: 0
-            },
-
-            myElementNewAttribute: {
-              type: String,
-              value: 'default value'
-            },
-
-            myElementNewCreated: {
-              type: String,
-              value: 'default value'
-            },
-
-            myElementNewAttached: {
-              type: String,
-              value: 'default value'
-            },
-
-            myElementNewReady: {
-              type: String,
-              value: 'default value'
-            }
-          },
-
-          observers: ['myElementNewObservedChanged(myElementNewObserved)']
+          return configuration;
         }
 
-        return configuration;
-      }
+        constructor() {
+          super();
 
-      constructor() {
-        super();
+          this.myElementNewCreated = 'defined by my-element-new';
+        }
 
-        this.myElementNewCreated = 'defined by my-element-new';
-      }
+        connectedCallback() {
+          super.connectedCallback();
 
-      connectedCallback() {
-        super.connectedCallback();
+          this.myElementNewAttribute = this.getAttribute('myElementNewAttribute');
+          this.myElementNewAttached = 'defined by my-element-new';
+        }
 
-        this.myElementNewAttribute = this.getAttribute('myElementNewAttribute');
-        this.myElementNewAttached = 'defined by my-element-new';
-      }
+        ready() {
+          this.addEventListener('click', (e) => this.handleClick(e));
+          this._ensureAttribute('myElementNewAttribute', 'defined by my-element-new');
+          this.myElementAttribute = this.getAttribute('myElementAttribute');
+          this.myElementNewReady = 'defined by my-element-new';
 
-      ready() {
-        this.addEventListener('click', (e) => this.handleClick(e));
-        this._ensureAttribute('myElementNewAttribute', 'defined by my-element-new');
-        this.myElementAttribute = this.getAttribute('myElementAttribute');
-        this.myElementNewReady = 'defined by my-element-new';
+          super.ready();
+        }
 
-        super.ready();
-      }
+        myElementNewObservedChanged() {
+          this.myElementNewObserved = 'changed by my-element-new';
+        }
 
-      myElementNewObservedChanged() {
-        this.myElementNewObserved = 'changed by my-element-new';
-      }
-
-      handleClick(e) {
-        e.stopPropagation();
-        this.myElementNewClick = 'click captured by my-element-new';
-        this.myElementNewClickCount += 1;
+        handleClick(e) {
+          e.stopPropagation();
+          this.myElementNewClick = 'click captured by my-element-new';
+          this.myElementNewClickCount += 1;
+        }
       }
     }
+
+    let MyElementNew = MyElementNewInjector(Polymer.Element);
 
     customElements.define(MyElementNew.is, MyElementNew);
   </script>
