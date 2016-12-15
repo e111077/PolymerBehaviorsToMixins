@@ -72,7 +72,7 @@
   </template>
   <script>
 
-    MyElementNewInjector = (...injectedClasses) => {
+    MyElementNewSyntaxInjector = (...injectedClasses) => {
       let Empty = superClass => {
         return class extends superClass {};
       }
@@ -170,7 +170,7 @@
       }
     }
 
-    let MyElementNewSyntax = MyElementNewInjector(Polymer.Element);
+    let MyElementNewSyntax = MyElementNewSyntaxInjector(Polymer.Element);
 
     customElements.define(MyElementNewSyntax.is, MyElementNewSyntax);
   </script>
