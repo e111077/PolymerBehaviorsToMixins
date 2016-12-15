@@ -1,5 +1,7 @@
 <script>
-  MyMixin2 = (SuperClass) => {
+  window.MyMixins = window.MyMixins || {};
+  
+  MyMixins.MyMixin2 = (SuperClass) => {
     return class MyMixin2 extends SuperClass {
       static get config() {
         let configuration = {
@@ -142,6 +144,7 @@
 
         this.myElementNewCreated = 'defined by my-mixin-2';
         this.myMixin1Created = 'defined by my-mixin-2';
+        this.myMixin2Created = 'defined by my-mixin-2';
       }
 
       connectedCallback() {

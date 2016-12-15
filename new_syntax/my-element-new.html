@@ -71,7 +71,9 @@
     </div>
   </template>
   <script>
-    class MyElementNew extends MyMixin1(MyMixin2(Polymer.Element)) {
+    let SuperClass = MyMixins.MyMixin1(MyMixins.MyMixin2(Polymer.Element));
+
+    class MyElementNew extends SuperClass {
       static get is() { return 'my-element-new' }
 
       static get config() {

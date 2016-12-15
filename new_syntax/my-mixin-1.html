@@ -1,5 +1,7 @@
 <script>
-  let MyMixin1 = (SuperClass) => {
+  window.MyMixins = window.MyMixins || {};
+  
+  MyMixins.MyMixin1 = (SuperClass) => {
     return class MyMixin1 extends SuperClass {
       static get config() {
         let configuration = {

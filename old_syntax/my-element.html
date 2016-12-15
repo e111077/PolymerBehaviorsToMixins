@@ -1,4 +1,7 @@
 <link rel="import" href="../../polymer/polymer.html">
+<script>
+    Polymer._warn = console.warn;
+    </script>
 
 <link rel="import" href="../shared-styles.html">
 
@@ -14,8 +17,8 @@
     <div>
       <pre>
 <code>behaviors: [
-  Polymer.MyBehavior2,
-  Polymer.MyBehavior1
+  MyBehaviors.MyBehavior2,
+  MyBehaviors.MyBehavior1
 ]</code>
       </pre>
     </div>
@@ -79,8 +82,8 @@
       is: 'my-element',
 
       behaviors: [
-        Polymer.MyBehavior2,
-        Polymer.MyBehavior1
+        MyBehaviors.MyBehavior2,
+        MyBehaviors.MyBehavior1
       ],
 
       properties: {
@@ -128,7 +131,7 @@
       observers: ['myElementObservedChanged(myElementObserved)'],
 
       listeners: {
-        click: 'handleClickBehavior2'
+        click: 'handleClick'
       },
 
       hostAttributes: {
