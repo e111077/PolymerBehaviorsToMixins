@@ -18,22 +18,22 @@
 
     <div class="container">
       <h1>Properties</h1>
-      <div>myElementNew: [[myElementNewDefault]]</div>
+      <div>myElementNewSyntax: [[myElementNewSyntaxDefault]]</div>
       <div>myMixin1: [[myMixin1Default]]</div>
       <div>myMixin2: [[myMixin2Default]]</div>
     </div>
 
     <div class="container">
       <h1>Observed Properties</h1>
-      <div>myElementNew: [[myElementNewObserved]]</div>
+      <div>myElementNewSyntax: [[myElementNewSyntaxObserved]]</div>
       <div>myMixin1: [[myMixin1Observed]]</div>
       <div>myMixin2: [[myMixin2Observed]]</div>
     </div>
 
     <div class="container">
       <h1>Listeners</h1>
-      <div>myElementNew: [[myElementNewClick]]</div>
-      <div>clicks: [[myElementNewClickCount]]</div>
+      <div>myElementNewSyntax: [[myElementNewSyntaxClick]]</div>
+      <div>clicks: [[myElementNewSyntaxClickCount]]</div>
       <div>myMixin1: [[myMixin1Click]]</div>
       <div>clicks: [[myMixin1ClickCount]]</div>
       <div>myMixin2: [[myMixin2Click]]</div>
@@ -42,14 +42,14 @@
 
     <div class="container">
       <h1>Host Attributes</h1>
-      <div>myElementNew: [[myElementNewAttribute]]</div>
+      <div>myElementNewSyntax: [[myElementNewSyntaxAttribute]]</div>
       <div>myMixin1: [[myMixin1Attribute]]</div>
       <div>myMixin2: [[myMixin2Attribute]]</div>
     </div>
 
     <div class="container">
       <h1>Created Callback</h1>
-      <div>myElementNew: [[myElementNewCreated]]</div>
+      <div>myElementNewSyntax: [[myElementNewSyntaxCreated]]</div>
       <div>myMixin1: [[myMixin1Created]]</div>
       <div>myMixin2: [[myMixin2Created]]</div>
     </div>
@@ -57,7 +57,7 @@
 
   <div class="container">
       <h1>Attached Callback</h1>
-      <div>myElementNew: [[myElementNewAttached]]</div>
+      <div>myElementNewSyntax: [[myElementNewSyntaxAttached]]</div>
       <div>myMixin1: [[myMixin1Attached]]</div>
       <div>myMixin2: [[myMixin2Attached]]</div>
     </div>
@@ -65,7 +65,7 @@
 
   <div class="container">
       <h1>Ready Callback</h1>
-      <div>myElementNew: [[myElementNewReady]]</div>
+      <div>myElementNewSyntax: [[myElementNewSyntaxReady]]</div>
       <div>myMixin1: [[myMixin1Ready]]</div>
       <div>myMixin2: [[myMixin2Ready]]</div>
     </div>
@@ -89,48 +89,48 @@
         static get config() {
           let configuration = {
             properties: {
-              myElementNewDefault: {
+              myElementNewSyntaxDefault: {
                 type: String,
                 value: 'defined by my-element-new-syntax'
               },
               
-              myElementNewObserved: {
+              myElementNewSyntaxObserved: {
                 type: String,
                 value: 'default value'
               },
 
-              myElementNewClick: {
+              myElementNewSyntaxClick: {
                 type: String,
                 value: 'no clicks captured yet'
               },
 
-              myElementNewClickCount: {
+              myElementNewSyntaxClickCount: {
                 type: Number,
                 value: 0
               },
 
-              myElementNewAttribute: {
+              myElementNewSyntaxAttribute: {
                 type: String,
                 value: 'default value'
               },
 
-              myElementNewCreated: {
+              myElementNewSyntaxCreated: {
                 type: String,
                 value: 'default value'
               },
 
-              myElementNewAttached: {
+              myElementNewSyntaxAttached: {
                 type: String,
                 value: 'default value'
               },
 
-              myElementNewReady: {
+              myElementNewSyntaxReady: {
                 type: String,
                 value: 'default value'
               }
             },
 
-            observers: ['myElementNewObservedChanged(myElementNewObserved)']
+            observers: ['myElementNewSyntaxObservedChanged(myElementNewSyntaxObserved)']
           }
 
           return configuration;
@@ -139,33 +139,33 @@
         constructor() {
           super();
 
-          this.myElementNewCreated = 'defined by my-element-new-syntax';
+          this.myElementNewSyntaxCreated = 'defined by my-element-new-syntax';
         }
 
         connectedCallback() {
           super.connectedCallback();
 
-          this.myElementNewAttribute = this.getAttribute('myElementNewAttribute');
-          this.myElementNewAttached = 'defined by my-element-new-syntax';
+          this.myElementNewSyntaxAttribute = this.getAttribute('myElementNewSyntaxAttribute');
+          this.myElementNewSyntaxAttached = 'defined by my-element-new-syntax';
         }
 
         ready() {
           this.addEventListener('click', (e) => this.handleClick(e));
-          this._ensureAttribute('myElementNewAttribute', 'defined by my-element-new-syntax');
+          this._ensureAttribute('myElementNewSyntaxAttribute', 'defined by my-element-new-syntax');
           this.myElementAttribute = this.getAttribute('myElementAttribute');
-          this.myElementNewReady = 'defined by my-element-new-syntax';
-
+          this.myElementNewSyntaxReady = 'defined by my-element-new-syntax';
+          
           super.ready();
         }
 
-        myElementNewObservedChanged() {
-          this.myElementNewObserved = 'changed by my-element-new-syntax';
+        myElementNewSyntaxObservedChanged() {
+          this.myElementNewSyntaxObserved = 'changed by my-element-new-syntax';
         }
 
         handleClick(e) {
           e.stopPropagation();
-          this.myElementNewClick = 'click captured by my-element-new-syntax';
-          this.myElementNewClickCount += 1;
+          this.myElementNewSyntaxClick = 'click captured by my-element-new-syntax';
+          this.myElementNewSyntaxClickCount += 1;
         }
       }
     }

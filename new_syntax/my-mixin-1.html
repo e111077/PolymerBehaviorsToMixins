@@ -47,49 +47,49 @@
             },
 
             // My Element properties
-            myElementNew: {
+            myElementNewSyntaxDefault: {
               type: String,
               value: 'defined by my-mixin-1'
             },
             
-            myElementNewObserved: {
+            myElementNewSyntaxObserved: {
               type: String,
               value: 'default value'
             },
 
-            myElementNewClick: {
+            myElementNewSyntaxClick: {
               type: String,
               value: 'no clicks captured yet'
             },
 
-            myElementNewClickCount: {
+            myElementNewSyntaxClickCount: {
               type: Number,
               value: 0
             },
 
-            myElementNewAttribute: {
+            myElementNewSyntaxAttribute: {
               type: String,
               value: 'default value'
             },
 
-            myElementNewCreated: {
+            myElementNewSyntaxCreated: {
               type: String,
               value: 'default value'
             },
 
-            myElementNewAttached: {
+            myElementNewSyntaxAttached: {
               type: String,
               value: 'default value'
             },
 
-            myElementNewReady: {
+            myElementNewSyntaxReady: {
               type: String,
               value: 'default value'
             }
           },
 
           observers: [
-            'myElementNewObservedChanged(myElementNewObserved)',
+            'myElementNewSyntaxObservedChanged(myElementNewSyntaxObserved)',
             'myMixin1ObservedChanged(myMixin1Observed)'
           ]
         }
@@ -100,31 +100,31 @@
       constructor() {
         super();
 
-        this.myElementNewCreated = 'defined by my-mixin-1';
+        this.myElementNewSyntaxCreated = 'defined by my-mixin-1';
         this.myMixin1Created = 'defined by my-mixin-1';
       }
 
       connectedCallback() {
         super.connectedCallback();
 
-        this.myElementNewAttribute = this.getAttribute('myElementNewAttribute');
-        this.myElementNewAttached = 'defined by my-mixin-1';
+        this.myElementNewSyntaxAttribute = this.getAttribute('myElementNewSyntaxAttribute');
+        this.myElementNewSyntaxAttached = 'defined by my-mixin-1';
       }
 
       ready() {
         this.addEventListener('click', (e) => this.handleClickMixin1(e));
-        this._ensureAttribute('myElementNewAttribute', 'defined by my-mixin-1');
+        this._ensureAttribute('myElementNewSyntaxAttribute', 'defined by my-mixin-1');
         this._ensureAttribute('myMixin1Attribute', 'defined by my-mixin-1');
 
         this.myElementAttribute = this.getAttribute('myElementAttribute');
         this.myMixin1Attribute = this.getAttribute('myMixin1Attribute');
-        this.myElementNewReady = 'defined by my-mixin-1';
+        this.myElementNewSyntaxReady = 'defined by my-mixin-1';
 
         super.ready();
       }
 
-      myElementNewObservedChanged() {
-        this.myElementNewObserved = 'changed by my-mixin-1';
+      myElementNewSyntaxObservedChanged() {
+        this.myElementNewSyntaxObserved = 'changed by my-mixin-1';
       }
 
       myMixin1ObservedChanged() {
@@ -133,8 +133,8 @@
 
       // listener set in my-element
       handleClick(e) {
-        this.myElementNewClick = 'click captured by my-mixin-1';
-        this.myElementNewClickCount += 1;
+        this.myElementNewSyntaxClick = 'click captured by my-mixin-1';
+        this.myElementNewSyntaxClickCount += 1;
       }
 
       handleClickMixin1(e) {
