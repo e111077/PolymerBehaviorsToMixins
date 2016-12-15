@@ -1,0 +1,174 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<link rel="import" href="my-behavior-1.html">
+<link rel="import" href="my-behavior-2.html">
+
+<dom-module id="my-element">
+  <template>
+    <style>
+      .container {
+        border: solid black 1px;
+        border-radius: 5px;
+        margin: 8px;
+        padding: 1em;
+      }
+
+      code {
+        border-radius: 3px;
+        font-size: 85%;
+        padding: .2em;
+        background-color: rgba(0,0,0,0.04);
+      }
+    </style>
+
+    <div><code>my-element</code> has behaviors <code>my-behavior-1</code> which is the root behavior and <code>my-behavior-2</code> which is mixed into <code>my-behavior-1</code>. i.e.</div>
+    <div>
+      <pre>
+<code>behaviors: [
+  Polymer.MyBehavior1,
+  Polymer.MyBehavior2
+]</code>
+      </pre>
+    </div>
+
+    <div class="container">
+      <h1>Properties</h1>
+      <div>myElement: [[myElementDefault]]</div>
+      <div>myBehavior1: [[myBehavior1Default]]</div>
+      <div>myBehavior2: [[myBehavior2Default]]</div>
+    </div>
+
+    <div class="container">
+      <h1>Observed Properties</h1>
+      <div>myElement: [[myElementObserved]]</div>
+      <div>myBehavior1: [[myBehavior1Observed]]</div>
+      <div>myBehavior2: [[myBehavior2Observed]]</div>
+    </div>
+
+    <div class="container">
+      <h1>Listeners</h1>
+      <div>myElement: [[myElementClick]]</div>
+      <div>clicks: [[myElementClickCount]]</div>
+      <div>myBehavior1: [[myBehavior1Click]]</div>
+      <div>clicks: [[myBehavior1ClickCount]]</div>
+      <div>myBehavior2: [[myBehavior2Click]]</div>
+      <div>clicks: [[myBehavior2ClickCount]]</div>
+    </div>
+
+    <div class="container">
+      <h1>Host Attributes</h1>
+      <div>myElement: [[myElementAttribute]]</div>
+      <div>myBehavior1: [[myBehavior1Attribute]]</div>
+      <div>myBehavior2: [[myBehavior2Attribute]]</div>
+    </div>
+
+    <div class="container">
+      <h1>Created Callback</h1>
+      <div>myElement: [[myElementCreated]]</div>
+      <div>myBehavior1: [[myBehavior1Created]]</div>
+      <div>myBehavior2: [[myBehavior2Created]]</div>
+    </div>
+  </template>
+
+  <div class="container">
+      <h1>Attached Callback</h1>
+      <div>myElement: [[myElementAttached]]</div>
+      <div>myBehavior1: [[myBehavior1Attached]]</div>
+      <div>myBehavior2: [[myBehavior2Attached]]</div>
+    </div>
+  </template>
+
+  <div class="container">
+      <h1>Ready Callback</h1>
+      <div>myElement: [[myElementReady]]</div>
+      <div>myBehavior1: [[myBehavior1Ready]]</div>
+      <div>myBehavior2: [[myBehavior2Ready]]</div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'my-element',
+
+      behaviors: [
+        Polymer.MyBehavior1,
+        Polymer.MyBehavior2
+      ],
+
+      properties: {
+        myElementDefault: {
+          type: String,
+          value: 'defined by my-element'
+        },
+        
+        myElementObserved: {
+          type: String,
+          value: 'default value'
+        },
+
+        myElementClick: {
+          type: String,
+          value: 'no clicks captured yet'
+        },
+
+        myElementClickCount: {
+          type: Number,
+          value: 0
+        },
+
+        myElementAttribute: {
+          type: String,
+          value: 'default value'
+        },
+
+        myElementCreated: {
+          type: String,
+          value: 'default value'
+        },
+
+        myElementAttached: {
+          type: String,
+          value: 'default value'
+        },
+
+        myElementReady: {
+          type: String,
+          value: 'default value'
+        }
+      },
+
+      observers: ['myElementObservedChanged(myElementObserved)'],
+
+      listeners: {
+        click: 'handleClick',
+      },
+
+      hostAttributes: {
+        myElementAttribute: 'defined by my-element'
+      },
+
+      created: function() {
+        this.myElementCreated = 'defined by my-element';
+      },
+
+      attached: function() {
+        this.myElementAttribute = this.getAttribute('myElementAttribute');
+
+        this.myElementAttached = 'defined by my-element';
+      },
+
+      ready: function() {
+        this.myElementReady = 'defined by my-element';
+      },
+
+      myElementObservedChanged: function() {
+        this.myElementObserved = 'changed by my-element';
+      },
+
+      handleClick: function(e) {
+        e.stopPropagation();
+        this.myElementClick = 'click captured by my-element';
+        this.myElementClickCount += 1;
+      }
+    });
+  </script>
+</dom-module>

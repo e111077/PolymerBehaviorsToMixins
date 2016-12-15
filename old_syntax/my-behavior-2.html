@@ -1,0 +1,137 @@
+<script>
+  Polymer.MyBehavior2 = {
+      properties: {
+        myBehavior2Default: {
+          type: String,
+          value: 'defined by my-behavior-2'
+        },
+        
+        myBehavior2Observed: {
+          type: String,
+          value: 'default value'
+        },
+
+        myBehavior2Click: {
+          type: String,
+          value: 'no clicks captured yet'
+        },
+
+        myBehavior2ClickCount: {
+          type: Number,
+          value: 0
+        },
+
+        myBehavior2Attribute: {
+          type: String,
+          value: 'default value'
+        },
+
+        myBehavior2Created: {
+          type: String,
+          value: 'default value'
+        },
+
+        myBehavior2Attached: {
+          type: String,
+          value: 'default value'
+        },
+
+        myBehavior2Ready: {
+          type: String,
+          value: 'default value'
+        },
+
+        // My Element properties
+        myElement: {
+          type: String,
+          value: 'defined by my-behavior-2'
+        },
+        
+        myElementObserved: {
+          type: String,
+          value: 'default value'
+        },
+
+        myElementClick: {
+          type: String,
+          value: 'no clicks captured yet'
+        },
+
+        myElementClickCount: {
+          type: Number,
+          value: 0
+        },
+
+        myElementAttribute: {
+          type: String,
+          value: 'default value'
+        },
+
+        myElementCreated: {
+          type: String,
+          value: 'default value'
+        },
+
+        myElementAttached: {
+          type: String,
+          value: 'default value'
+        },
+
+        myElementReady: {
+          type: String,
+          value: 'default value'
+        }
+      },
+
+      observers: [
+        'myElementObservedChanged(myElementObserved)',
+        'myBehavior2ObservedChanged(myBehavior2Observed)'
+      ],
+
+      listeners: {
+        click: 'handleClickBehavior2',
+      },
+
+      hostAttributes: {
+        myElementAttribute: 'defined by my-behavior-2',
+        myBehavior2Attribute: 'defined by my-behavior-2',
+      },
+
+      created: function() {
+        this.myElementCreated = 'defined by my-behavior-2';
+        this.myBehavior2Created = 'defined by my-behavior-2';
+      },
+
+      attached: function() {
+        this.myElementAttribute = this.getAttribute('myElementAttribute');
+        this.myBehavior2Attribute = this.getAttribute('myBehavior2Attribute');
+        
+        this.myElementAttached = 'defined by my-behavior-2';
+        this.myBehavior2Attached = 'defined by my-behavior-2';
+      },
+
+      ready: function() {
+        this.myElementReady = 'defined by my-behavior-2';
+        this.myBehavior2Ready = 'defined by my-behavior-2';
+      },
+
+      myElementObservedChanged: function() {
+        this.myElementObserved = 'changed by my-behavior-2';
+      },
+
+      myBehavior2ObservedChanged: function() {
+        this.myBehavior2Observed = 'changed by my-behavior-2';
+      },
+
+      // listener set in my-element
+      handleClick: function(e) {
+        this.myElementClick = 'click captured by my-behavior-2';
+        this.myElementClickCount += 1;
+      },
+
+      handleClickBehavior2: function(e) {
+        this.myBehavior2Click = 'click captured by my-behavior-2';
+        this.myBehavior2ClickCount += 1;
+      }
+    }
+</script>
