@@ -72,16 +72,16 @@
   </template>
   <script>
 
-    MyElementNewSyntaxInjector = (...injectedClasses) => {
+    MyElementNewSyntaxInjector = (...injectedMixins) => {
       let Empty = superClass => {
         return class extends superClass {};
       }
 
-      injectedClasses[0] = injectedClasses[0] ? injectedClasses[0] : Empty;
-      injectedClasses[1] = injectedClasses[1] ? injectedClasses[1] : Empty;
-      injectedClasses[2] = injectedClasses[2] ? injectedClasses[2] : Empty;
+      injectedMixins[0] = injectedMixins[0] ? injectedMixins[0] : Empty;
+      injectedMixins[1] = injectedMixins[1] ? injectedMixins[1] : Empty;
+      injectedMixins[2] = injectedMixins[2] ? injectedMixins[2] : Empty;
 
-      let newSuperClass = injectedClasses[2](MyMixins.MyMixin1(injectedClasses[1](MyMixins.MyMixin2(injectedClasses[0]))));
+      let newSuperClass = injectedMixins[2](MyMixins.MyMixin1(injectedMixins[1](MyMixins.MyMixin2(injectedMixins[0]))));
 
       return class MyElementNewSyntax extends newSuperClass {
         static get is() { return 'my-element-new-syntax' }
