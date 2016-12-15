@@ -1,25 +1,13 @@
 <link rel="import" href="../../polymer/polymer.html">
 
+<link rel="import" href="../shared-styles.html">
+
 <link rel="import" href="my-behavior-1.html">
 <link rel="import" href="my-behavior-2.html">
 
 <dom-module id="my-element">
   <template>
-    <style>
-      .container {
-        border: solid black 1px;
-        border-radius: 5px;
-        margin: 8px;
-        padding: 1em;
-      }
-
-      code {
-        border-radius: 3px;
-        font-size: 85%;
-        padding: .2em;
-        background-color: rgba(0,0,0,0.04);
-      }
-    </style>
+    <style is="custom-style" include="shared-styles"></style>
 
     <div><code>my-element</code> has behaviors <code>my-behavior-2</code> which is the root behavior
     and <code>my-behavior-1</code> which is mixed into <code>my-behavior-2</code>. i.e.</div>

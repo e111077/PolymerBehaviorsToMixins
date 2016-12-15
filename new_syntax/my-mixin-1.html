@@ -1,0 +1,144 @@
+<script>
+  let MyMixin1 = (SuperClass) => {
+    return class MyMixin1 extends SuperClass {
+      static get config() {
+        let configuration = {
+          properties: {
+            myMixin1Default: {
+              type: String,
+              value: 'defined by my-mixin-1'
+            },
+            
+            myMixin1Observed: {
+              type: String,
+              value: 'default value'
+            },
+
+            myMixin1Click: {
+              type: String,
+              value: 'no clicks captured yet'
+            },
+
+            myMixin1ClickCount: {
+              type: Number,
+              value: 0
+            },
+
+            myMixin1Attribute: {
+              type: String,
+              value: 'default value'
+            },
+
+            myMixin1Created: {
+              type: String,
+              value: 'default value'
+            },
+
+            myMixin1Attached: {
+              type: String,
+              value: 'default value'
+            },
+
+            myMixin1Ready: {
+              type: String,
+              value: 'default value'
+            },
+
+            // My Element properties
+            myElementNew: {
+              type: String,
+              value: 'defined by my-mixin-1'
+            },
+            
+            myElementNewObserved: {
+              type: String,
+              value: 'default value'
+            },
+
+            myElementNewClick: {
+              type: String,
+              value: 'no clicks captured yet'
+            },
+
+            myElementNewClickCount: {
+              type: Number,
+              value: 0
+            },
+
+            myElementNewAttribute: {
+              type: String,
+              value: 'default value'
+            },
+
+            myElementNewCreated: {
+              type: String,
+              value: 'default value'
+            },
+
+            myElementNewAttached: {
+              type: String,
+              value: 'default value'
+            },
+
+            myElementNewReady: {
+              type: String,
+              value: 'default value'
+            }
+          },
+
+          observers: [
+            'myElementNewObservedChanged(myElementNewObserved)',
+            'myMixin1ObservedChanged(myMixin1Observed)'
+          ]
+        }
+
+        return configuration;
+      }
+
+      constructor() {
+        super();
+
+        this.myElementNewCreated = 'defined by my-mixin-1';
+        this.myMixin1Created = 'defined by my-mixin-1';
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        this.myElementNewAttribute = this.getAttribute('myElementNewAttribute');
+        this.myElementNewAttached = 'defined by my-mixin-1';
+      }
+
+      ready() {
+        this.addEventListener('click', (e) => this.handleClickMixin1(e));
+        this._ensureAttribute('myElementNewAttribute', 'defined by my-mixin-1');
+        this._ensureAttribute('myMixin1Attribute', 'defined by my-mixin-1');
+
+        this.myElementAttribute = this.getAttribute('myElementAttribute');
+        this.myMixin1Attribute = this.getAttribute('myMixin1Attribute');
+        this.myElementNewReady = 'defined by my-mixin-1';
+
+        super.ready();
+      }
+
+      myElementNewObservedChanged() {
+        this.myElementNewObserved = 'changed by my-mixin-1';
+      }
+
+      myMixin1ObservedChanged() {
+        this.myMixin1Observed = 'changed by my-mixin-1';
+      }
+
+      // listener set in my-element
+      handleClick(e) {
+        this.myElementNewClick = 'click captured by my-mixin-1';
+        this.myElementNewClickCount += 1;
+      }
+
+      handleClickMixin1(e) {
+        this.myMixin1Click = 'click captured by my-mixin-1';
+        this.myMixin1ClickCount += 1;
+      }
+    }
+  }
+</script>
