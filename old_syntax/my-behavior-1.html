@@ -41,47 +41,6 @@
           value: 'default value'
         },
 
-        // My Behavior 2 properties
-        myBehavior2Default: {
-          type: String,
-          value: 'defined by my-behavior-2'
-        },
-        
-        myBehavior2Observed: {
-          type: String,
-          value: 'default value'
-        },
-
-        myBehavior2Click: {
-          type: String,
-          value: 'no clicks captured yet'
-        },
-
-        myBehavior2ClickCount: {
-          type: Number,
-          value: 0
-        },
-
-        myBehavior2Attribute: {
-          type: String,
-          value: 'default value'
-        },
-
-        myBehavior2Created: {
-          type: String,
-          value: 'default value'
-        },
-
-        myBehavior2Attached: {
-          type: String,
-          value: 'default value'
-        },
-
-        myBehavior2Ready: {
-          type: String,
-          value: 'default value'
-        },
-
         // My Element properties
         myElement: {
           type: String,
@@ -126,8 +85,7 @@
 
       observers: [
         'myElementObservedChanged(myElementObserved)',
-        'myBehavior1ObservedChanged(myBehavior1Observed)',
-        'myBehavior2ObservedChanged(myBehavior2Observed)'
+        'myBehavior1ObservedChanged(myBehavior1Observed)'
       ],
 
       listeners: {
@@ -137,29 +95,24 @@
       hostAttributes: {
         myElementAttribute: 'defined by my-behavior-1',
         myBehavior1Attribute: 'defined by my-behavior-1',
-        myBehavior2Attribute: 'defined by my-behavior-1',
       },
 
       created: function() {
         this.myElementCreated = 'defined by my-behavior-1';
         this.myBehavior1Created = 'defined by my-behavior-1';
-        this.myBehavior2Created = 'defined by my-behavior-1';
       },
 
       attached: function() {
         this.myElementAttribute = this.getAttribute('myElementAttribute');
         this.myBehavior1Attribute = this.getAttribute('myBehavior1Attribute');
-        this.myBehavior2Attribute = this.getAttribute('myBehavior1Attribute');
         
         this.myElementAttached = 'defined by my-behavior-1';
         this.myBehavior1Attached = 'defined by my-behavior-1';
-        this.myBehavior2Attached = 'defined by my-behavior-1';
       },
 
       ready: function() {
         this.myElementReady = 'defined by my-behavior-1';
         this.myBehavior1Ready = 'defined by my-behavior-1';
-        this.myBehavior2Ready = 'defined by my-behavior-1';
       },
 
       myElementObservedChanged: function() {
@@ -168,10 +121,6 @@
 
       myBehavior1ObservedChanged: function() {
         this.myBehavior1Observed = 'changed by my-behavior-1';
-      },
-
-      myBehavior2ObservedChanged: function() {
-        this.myBehavior2Observed = 'changed by my-behavior-1';
       },
 
       // listener set in my-element
@@ -183,12 +132,6 @@
       handleClickBehavior1: function(e) {
         this.myBehavior1Click = 'click captured by my-behavior-1';
         this.myBehavior1ClickCount += 1;
-      },
-
-      // listener set in my-behavior-2
-      handleClickBehavior2: function(e) {
-        this.myBehavior2Click = 'click captured by my-behavior-1';
-        this.myBehavior2ClickCount += 1;
       }
     }
 </script>

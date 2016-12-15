@@ -21,12 +21,13 @@
       }
     </style>
 
-    <div><code>my-element</code> has behaviors <code>my-behavior-1</code> which is the root behavior and <code>my-behavior-2</code> which is mixed into <code>my-behavior-1</code>. i.e.</div>
+    <div><code>my-element</code> has behaviors <code>my-behavior-2</code> which is the root behavior
+    and <code>my-behavior-1</code> which is mixed into <code>my-behavior-2</code>. i.e.</div>
     <div>
       <pre>
 <code>behaviors: [
-  Polymer.MyBehavior1,
-  Polymer.MyBehavior2
+  Polymer.MyBehavior2,
+  Polymer.MyBehavior1
 ]</code>
       </pre>
     </div>
@@ -90,8 +91,8 @@
       is: 'my-element',
 
       behaviors: [
-        Polymer.MyBehavior1,
-        Polymer.MyBehavior2
+        Polymer.MyBehavior2,
+        Polymer.MyBehavior1
       ],
 
       properties: {
@@ -151,12 +152,11 @@
       },
 
       attached: function() {
-        this.myElementAttribute = this.getAttribute('myElementAttribute');
-
         this.myElementAttached = 'defined by my-element';
       },
 
       ready: function() {
+        this.myElementAttribute = this.getAttribute('myElementAttribute');
         this.myElementReady = 'defined by my-element';
       },
 
