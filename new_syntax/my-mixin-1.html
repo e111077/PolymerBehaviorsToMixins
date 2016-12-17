@@ -109,18 +109,20 @@
 
         this.myElementNewSyntaxAttribute = this.getAttribute('myElementNewSyntaxAttribute');
         this.myElementNewSyntaxAttached = 'defined by my-mixin-1';
+        this.myMixin1Attached = 'defined by my-mixin-1';
       }
 
       ready() {
-        this.addEventListener('click', (e) => this.handleClickMixin1(e));
         this._ensureAttribute('myElementNewSyntaxAttribute', 'defined by my-mixin-1');
         this._ensureAttribute('myMixin1Attribute', 'defined by my-mixin-1');
+        super.ready();
+
+        this.addEventListener('click', (e) => this.handleClickMixin1(e));
 
         this.myElementAttribute = this.getAttribute('myElementAttribute');
         this.myMixin1Attribute = this.getAttribute('myMixin1Attribute');
         this.myElementNewSyntaxReady = 'defined by my-mixin-1';
-
-        super.ready();
+        this.myMixin1Ready = 'defined by my-mixin-1';
       }
 
       myElementNewSyntaxObservedChanged() {

@@ -148,12 +148,13 @@
         }
 
         ready() {
-          this.addEventListener('click', (e) => this.handleClick(e));
           this._ensureAttribute('myElementNewSyntaxAttribute', 'defined by my-element-new-syntax');
+          super.ready();
+
+          this.addEventListener('click', (e) => this.handleClick(e));
+
           this.myElementAttribute = this.getAttribute('myElementAttribute');
           this.myElementNewSyntaxReady = 'defined by my-element-new-syntax';
-          
-          super.ready();
         }
 
         myElementNewSyntaxObservedChanged() {
